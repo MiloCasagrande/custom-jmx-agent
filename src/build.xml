@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ======================================================================
+     22/mar/2012 22:10:31
+
+     CustomJMXAgent
+     Build file for the CustomJMXAgent project
+
+     Milo Casagrande
+     ====================================================================== -->
+<project name="CustomJMXAgent" default="build">
+    <description>
+            Build file for the CustomJMXAgent project
+    </description>
+
+    <!-- =================================
+          target: default
+         ================================= -->
+    <target name="build" description="Build file for the CustomJMXAgent project">
+      <jar basedir="${build.classes.dir}" jarfile="${dist.agent.jar}">
+        <manifest>
+          <attribute name="Premain-Class" value="com.customagent.CustomJMXAgent"/>
+        </manifest>
+      </jar>
+    </target>
+</project>

@@ -1,0 +1,16 @@
+= Custom Java JMX Agent =
+
+This is a simple custom JMX agent in order to prevent firewall problems
+with the default RMI random port usage.
+
+To execute it, attach it to the Java application with:
+-Drmi.custom.server.port=PORT -javaagent:FILE.jar
+
+The `rmi.custom.server.port' is optinal, and the port will be set to
+`7199'.
+
+Warning: the program has not been tested yet!
+
+= TODO =
+ * Complete the build script
+ * Test it!
