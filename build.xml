@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2012 Milo Casagrande milo@milo.name
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!-- ======================================================================
+     22/mar/2012 22:10:31
+
+     CustomJMXAgent
+     Build file for the CustomJMXAgent project
+
+     Milo Casagrande
+     ====================================================================== -->
+<project name="CustomJMXAgent" default="build" basedir=".">
+    <description>
+            Build file for the CustomJMXAgent project
+    </description>
+
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="debug.flag" value="on"/>
+    <property name="jar.name" value="CustomJMXAgent.jar"/>
+    <property name="premain.class" value="com.customagent.CustomJMXAgent"/>
+
+    <!-- Used as timestamp for the MANIFEST file -->
+    <tstamp id="date">
+        <format property="TODAY" pattern="yyyy-mm-dd--hh.mm.ssaa"/>
+    </tstamp>
+
+    <!-- - - - - - - - - - - - - - - - - -
+        target: init
+             - - - - - - - - - - - - - - - - - -->
+    <target name="init" description="Initialize the necessary directories">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <!-- =================================
+              target: clean
+             ================================= -->
+    <target name="clean" description="Remove directories and files used for the build">
+        <delete includeemptydirs="true" failonerror="false" dir="${build.dir}" followsymlinks="false" />
+    </target>
+
+    <!-- =================================
+          target: build
+         ================================= -->
+    <target name="build" depends="init" description="Build file for the CustomJMXAgent project">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="${debug.flag}" fork="true" includeantruntime="true" includejavaruntime="true" />
+        <jar basedir="${build.dir}" jarfile="${jar.name}" duplicate="preserve" index="true" destfile="${build.dir}/${jar.name}">
+            <manifest>
+                <attribute name="Premain-Class" value="${premain.class}"/>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Built-On" value="${TODAY}"/>
+            </manifest>
+        </jar>
+    </target>
+</project>
